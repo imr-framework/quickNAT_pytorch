@@ -39,9 +39,9 @@ Virtual environment is extremly useful when working with many different projects
 
 2. Use `python -m venv myenv` to create a virtual environment at specified location. You can change `myenv` to any name you prefer. We can check if the virtual environment is succesfully created by checking if the folder exist in specified location. 
 
-3. Update pip if needed using method described above. 
+3. Run **activate** under the **Scripts** folder in your virtual environment to activate your virtual environment. We can check what packages are already installed using `pip list`.
 
-4. Run **activate** under the **Scripts** folder in your virtual environment to activate your virtual environment. We can check what packages are already installed using `pip list`.
+4. Update pip if needed using method described above.
 
 5. After virtual environment is activated, we can install software packages needed for this project.
 
@@ -55,6 +55,19 @@ Virtual environment is extremly useful when working with many different projects
 3. Add your virtual environment to Jupyter notebook using `python -m ipykernel install --user --name=myenv`
 
 4. Open Jupyter notebook, you should be able to select your virtual environment now. 
+
+## Install all required packages for QuickNAT
+1. First start Jupyter notebook
+
+2. Direct Jupyter notebook to your project folder
+
+3. Select your virtual environment by **New --> YourVirtualEnvironmentName**
+
+4. A jupyter notebook file should be created in the folder you specified. Make sure there is a file **requirement.txt** inside the same folder. If you unzip the entire repository, the file should be there. 
+
+5. Use `!pip install -r requirements.txt` to install all required package for QuickNAT.
+
+6. You are all set!
 
 ## Author
 Enlin Qian eq2144@columbia.edu
