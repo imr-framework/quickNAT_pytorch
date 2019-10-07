@@ -48,7 +48,7 @@ Virtual environment is extremly useful when working with many different projects
 5. To exit from virtual environment, simply use `deactivate`.
 
 ## Connect virtual environment to Jupyter notebook
-1. First activate your virtual environment using method described [above](#Virtual-environment Installation). 
+1. First activate your virtual environment using method described [above](#Virtual-environment-Installation). 
 
 2. Install IPython kernel to Jupyter notebook using `pip install --user ipykernel`
 
