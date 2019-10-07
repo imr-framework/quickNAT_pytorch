@@ -52,7 +52,7 @@ Virtual environment is extremly useful when working with many different projects
 
 2. Install IPython kernel to Jupyter notebook using `pip install --user ipykernel`
 
-3. Add your virtual environment to Jupyter notebook using `python -m ipykernel install --user --name=myenv`
+3. Deactivate your virtual environment and add your virtual environment to Jupyter notebook using `python -m ipykernel install --user --name=myenv`
 
 ## Install all required packages for QuickNAT
 1. In command prompt, `cd` into your project folder.
@@ -75,4 +75,4 @@ Enlin Qian eq2144@columbia.edu
 [1] Guha Roy, A., Conjeti, S., Navab, N., and Wachinger, C. 2018. QuickNAT: A Fully Convolutional Network for Quick and Accurate Segmentation of Neuroanatomy. Accepted for publication at **NeuroImage**, https://arxiv.org/abs/1801.04161. 
 
 ## Acknowledgement
-I would like to thank Keerthi Sravan Ravi for providing feedbacks for this readme. 
+I would like to thank Keerthi Sravan Ravi and Dr. Sairam Geethanath for providing feedbacks for this readme. 
