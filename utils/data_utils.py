@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 
 import h5py
 import nibabel as nb
@@ -6,6 +7,7 @@ import numpy as np
 import torch
 import torch.utils.data as data
 from torchvision import transforms
+
 import utils.preprocessor as preprocessor
 
 transform_train = transforms.Compose([
@@ -31,7 +33,7 @@ class ImdbData(data.Dataset):
         return len(self.y)
 
 
-def get_imdb_dataset(data_params):
+def get_imdb_dataset_orig(data_params):
     data_train = h5py.File(os.path.join(data_params['data_dir'], data_params['train_data_file']), 'r')
     label_train = h5py.File(os.path.join(data_params['data_dir'], data_params['train_label_file']), 'r')
     class_weight_train = h5py.File(os.path.join(data_params['data_dir'], data_params['train_class_weights_file']), 'r')
@@ -45,6 +47,50 @@ def get_imdb_dataset(data_params):
     return (ImdbData(data_train['data'][()], label_train['label'][()], class_weight_train['class_weights'][()],
                      transforms=transform_train),
             ImdbData(data_test['data'][()], label_test['label'][()], class_weight_test['class_weights'][()]))
+
+
+def get_imdb_dataset(data_params):
+    # Prune train dataset to same shape
+    files = sorted(list(Path(data_params['train_data_file']).glob('*.nii')))
+    train = []
+    for f in files:
+        arr = nb.load(str(f)).get_fdata()
+        z_center = round(arr.shape[2] / 2)
+        arr = arr[:, :, (z_center - 128):(z_center + 128)]
+        train.append(arr)
+    train = np.array(train)
+
+    # Prune train label dataset to same shape
+    files = sorted(list(Path(data_params['train_label_file']).glob('*.nii.gz')))
+    train_label = []
+    for f in files:
+        arr = nb.load(str(f)).get_fdata()
+        z_center = round(arr.shape[2] / 2)
+        arr = arr[:, :, (z_center - 128):(z_center + 128)]
+        train_label.append(arr)
+    train_label = np.array(train_label)
+
+    # Prune test dataset to same shape
+    files = sorted(list(Path(data_params['test_data_file']).glob('*.nii')))
+    test = []
+    for f in files:
+        arr = nb.load(str(f)).get_fdata()
+        z_center = round(arr.shape[2] / 2)
+        arr = arr[:, :, (z_center - 128):(z_center + 128)]
+        test.append(arr)
+    test = np.array(test)
+
+    # Prune train label dataset to same shape
+    files = sorted(list(Path(data_params['test_label_file']).glob('*.nii.gz')))
+    test_label = []
+    for f in files:
+        arr = nb.load(str(f)).get_fdata()
+        z_center = round(arr.shape[2] / 2)
+        arr = arr[:, :, (z_center - 128):(z_center + 128)]
+        test_label.append(arr)
+    test_label = np.array(test_label)
+
+    return ImdbData(train, train_label, np.ones((28, 1))), ImdbData(test, test_label, np.ones((28, 1)))
 
 
 def load_dataset(file_paths,
@@ -159,7 +205,7 @@ def load_file_paths(data_dir, label_dir, volumes_txt_file=None):
         volumes_to_use = [name for name in os.listdir(data_dir)]
 
     file_paths = [
-        [os.path.join(data_dir, vol, 'mri/orig.mgz'), os.path.join(label_dir, vol+'_glm.mgz')]
+        [os.path.join(data_dir, vol, 'mri/orig.mgz'), os.path.join(label_dir, vol + '_glm.mgz')]
         for
         vol in volumes_to_use]
     return file_paths
