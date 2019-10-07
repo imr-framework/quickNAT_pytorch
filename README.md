@@ -70,5 +70,9 @@ Virtual environment is extremly useful when working with many different projects
 ## Author
 Enlin Qian eq2144@columbia.edu
 
+
 ## Reference
 [1] Guha Roy, A., Conjeti, S., Navab, N., and Wachinger, C. 2018. QuickNAT: A Fully Convolutional Network for Quick and Accurate Segmentation of Neuroanatomy. Accepted for publication at **NeuroImage**, https://arxiv.org/abs/1801.04161. 
+
+## Acknowledgement
+I would like to thank Keerthi Sravan Ravi for providing feedbacks for this readme. 
