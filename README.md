@@ -52,7 +52,7 @@ Virtual environment is extremly useful when working with many different projects
 
 2. Install IPython kernel to Jupyter notebook using `pip install --user ipykernel`
 
-3. Deactivate your virtual environment and add your virtual environment to Jupyter notebook using `python -m ipykernel install --user --name=myenv`
+3. Make sure your virtual environment is still activated and add your virtual environment to Jupyter notebook using `python -m ipykernel install --user --name=myenv`
 
 ## Install all required packages for QuickNAT
 1. In command prompt, `cd` into your project folder.
