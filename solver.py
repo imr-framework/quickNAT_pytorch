@@ -85,8 +85,9 @@ class Solver(object):
             torch.cuda.empty_cache()
             model.cuda(self.device)
 
-        print('START TRAINING. : model name = %s, device = %s' % (
-            self.model_name, torch.cuda.get_device_name(self.device)))
+        # print('START TRAINING. : model name = %s, device = %s' % (
+        #     self.model_name, torch.cuda.get_device_name(self.device)))
+        print('START TRAINING. : model name = %s' % (self.model_name))
         current_iteration = self.start_iteration
         for epoch in range(self.start_epoch, self.num_epochs + 1):
             print("\n==== Epoch [ %d  /  %d ] START ====" % (epoch, self.num_epochs))
