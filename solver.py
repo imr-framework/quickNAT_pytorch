@@ -120,7 +120,7 @@ class Solver(object):
                         if i_batch % self.log_nth == 0:
                             self.logWriter.loss_per_iter(loss.item(), i_batch, current_iteration)
                         current_iteration += 1
-
+                        print(current_iteration)
                     loss_arr.append(loss.item())
 
                     _, batch_output = torch.max(output, dim=1)
